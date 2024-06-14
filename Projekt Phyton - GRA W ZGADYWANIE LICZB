@@ -1,0 +1,52 @@
+import random
+import math
+
+# Funkcja do pobierania poprawnych danych wejściowych
+def get_input(prompt):
+    while True:
+        try:
+            value = int(input(prompt))
+            return value
+        except ValueError:
+            print("Proszę wprowadzić poprawną liczbę całkowitą.")
+
+# Pobieranie dolnej granicy
+lower = get_input("Podaj dolną granicę: ")
+
+# Pobieranie górnej granicy
+upper = get_input("Podaj górną granicę: ")
+
+# Generowanie losowej liczby w zakresie od lower do upper
+x = random.randint(lower, upper)
+print("\n\tMasz tylko ", 
+    round(math.log(upper - lower + 1, 2)),
+    " szans, aby zgadnąć liczbę!\n")
+
+# Inicjalizacja liczby prób
+count = 0
+
+# Obliczanie maksymalnej liczby prób
+max_tries = round(math.log(upper - lower + 1, 2))
+
+# Pętla zgadywania
+while count < max_tries:
+    count += 1
+
+    # Pobieranie liczby od użytkownika
+    guess = get_input("Zgadnij liczbę: ")
+
+    # Sprawdzanie warunków
+    if x == guess:
+        print("Gratulacje! Udało Ci się za ", count, " razem.")
+        break
+    elif x > guess:
+        print("Za mała liczba!")
+    else:
+        print("Za duża liczba!")
+
+# Jeśli liczba prób została przekroczona
+if count >= max_tries:
+    print("\nLiczba to: %d" % x)
+    print("\tNastępnym razem będzie lepiej!")
+
+# Lepiej użyć tego kodu w PyCharm!
